@@ -83,6 +83,67 @@ body {
     transition: border-color 1s, background-color 1s;
 }
 
+
+
+.resumeGameDiv {
+    position: absolute;
+    top: 30vw;
+    left: 38.5vw;
+    width: 24vw;
+    height: 5vw;
+    background-color: white;
+    border-style: solid;
+    border-radius: 25px;
+    border-color: gray;
+    transition: border-color 1s, background-color 1s;
+}
+
+.resumeGameDiv:hover {
+    position: absolute;
+    top: 30vw;
+    left: 38.5vw;
+    width: 24vw;
+    height: 5vw;
+    background-color: darkgray;
+    border-style: solid;
+    border-radius: 25px;
+    border-color: dimgray;
+    transition: border-color 1s, background-color 1s;
+}
+
+
+
+.newGameDiv {
+    position: absolute;
+    top: 20vw;
+    left: 37vw;
+    width: 27vw;
+    height: 5vw;
+    background-color: white;
+    border-style: solid;
+    border-radius: 25px;
+    border-color: gray;
+    transition: border-color 1s, background-color 1s;
+}
+
+.newGameDiv:hover {
+    position: absolute;
+    top: 20vw;
+    left: 37vw;
+    width: 27vw;
+    height: 5vw;
+    background-color: darkgray;
+    border-style: solid;
+    border-radius: 25px;
+    border-color: dimgray;
+    transition: border-color 1s, background-color 1s;
+}
+
+
+
+
+
+
 .Gametitle {
     text-align: center;
     color: white;
@@ -109,6 +170,13 @@ body {
 }
 
 .playerStart {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 2s;
+    z-index: -9;
+}
+
+.continue{
     position: absolute;
     opacity: 0;
     transition: opacity 2s;
@@ -537,7 +605,12 @@ body {
     transition: left 1s;
 }
 
-
+.cubeCash {
+    position: absolute;
+    width: 6vw;
+    height: 6vw;
+    background-image: url("CubeintO - Main Cube.png")
+}
 
 
 
