@@ -609,10 +609,21 @@ body {
     position: absolute;
     width: 6vw;
     height: 6vw;
-    background-image: url("CubeintO - Main Cube.png")
+    background-image: url("CubeintO - Main Cube.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 1vw;
+    left: 34vw;
+    background-color: blue;
 }
 
-
+.cash {
+    position: absolute;
+    top: -1.6vw;
+    color: white;
+    font-family: "Arial Black";
+    left: 35.7vw;
+}
 
 
 
