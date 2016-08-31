@@ -669,5 +669,66 @@ body {
     transition: background-color 1s;
 }
 
+.containerShopS {
+    background-color: lightblue;
+    position: absolute;
+    top: 18vw;
+    height: 8vw;
+    width: 42vw;
+    opacity: 0;
+    left: 100vw;
+    transition: opacity 1s;
+}
 
+.cubeimgText {
+    position: absolute;
+    left: 8vw;
+    top: -1.1vw;
+    font-size: 3vw;
+    font-family: "Arial"
+}
 
+.cubeimgS {
+    position: absolute;
+    height: 6vw;
+    width: 6vw;
+    background-color: darkslategray;
+    background-image: url("CubeintO - Main Cube.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 1vw;
+    left: 1vw;
+    transition: background-color 1s;
+}
+
+.cubeimgS:hover {
+    position: absolute;
+    height: 6vw;
+    width: 6vw;
+    background-color: white;
+    top: 1vw;
+    left: 1vw;
+    transition: background-color 1s;
+}
+
+.hf1 {
+    position: absolute;
+    height: 6vw;
+    width: 6vw;
+    background-image: url("CubeintO - FusedCube Half (1).png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: background-color 1s;
+    opacity: 0.8;
+}
+
+.hf2 {
+    position: absolute;
+    height: 6vw;
+    width: 6vw;
+    background-image: url("CubeintO - FusedCube Half (2).png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: background-color 1s;
+    opacity: 0.8;
+}
