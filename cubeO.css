@@ -252,6 +252,7 @@ body {
     border-width: 0.5vw;
     border-radius: 6px;
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 .d1 {
@@ -732,3 +733,33 @@ body {
     transition: background-color 1s;
     opacity: 0.8;
 }
+
+.hl {
+    transition: left 1s;
+}
+
+
+.hr {
+    transition: left 1s;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
