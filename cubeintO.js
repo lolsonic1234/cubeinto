@@ -1,7 +1,7 @@
-console.log("We are running on CUBEINT Official Ver.3");
-console.log("Hello there, I am the creator of CUBEINT. My name is Anthony M. DaLuz. If you are reading this feel free to poke around and have fun. Just do me a favor and dont steal anything yeh?");
+console.log("We are running on CUBEINT Official Ver 0.2");
+console.log("Hello, my name is Anthony M. DaLuz and im a Web Dev. I create little websites like these for fun, however this one wasnt for fun so yeah. Anyways im 15 and ive been studying HTML,CSS,Javascript and Jquery for around 2 years now. Well 2 years + the years this has been up for. Ive made this game specifically for a presentation and for my future resume. I also pushed in a donate button in a attempt to help my dad financially. So yeah thats me. Also please do not steal my code, you can poke around but.. try not to steal it yes? Yes. Thank youuu.");
 console.log(".....");
-console.log("OH RIGHT! Contact info! You can contact me on skype or hotmail. (Skype = anthony.daluz1) & (Email = anthonydaluz@hotmail.com)");
+console.log("OH RIGHT! Contact info! You can contact me on skype or hotmail. (Skype = anthony.daluz1) & (Email = suggyiem@gmail.com)");
 
 var outdeg = 0;
 var indeg = 0;
@@ -69,8 +69,8 @@ MAINsystem["tech"] = {
 // images
 
 var mainCube = "CubeintO - Main Cube.png";
-var fuseCubeL = "CubeintO - FusedCube Half (1).png";
-var fuseCubeR = "CubeintO - FusedCube Half (2).png";
+var fuseCubeL = "'CubeintO - FusedCube Half (1).png'";
+var fuseCubeR = "'CubeintO - FusedCube Half (2).png'";
 
 // Initiantion Function
 
@@ -539,7 +539,7 @@ $('.cubeimgS').click(function(){
     var cash = "cash2";
     var color = "none";
     
-    if(gash >= 10 && box1Cubes < box1limit){
+    if(gash >= 10 && box2Cubes < box2limit){
         spawnCube(type, box, randomX, randomY, color, cash, randomDeg, "split");
         document.cookie = "gash=" + (gash - 10);
         gash = load("gash");
@@ -557,7 +557,7 @@ function spawnCube(type, box, locationX, locationY, color, cash, deg, special){
     if(special == "no"){
         $('.box' + box).append('<div class="' + cash + '" style="position: absolute; width: 4vw; height: 4vw; background-color: ' + color + '; top: ' + locationY + 'vw; left: ' + locationX + 'vw; background-image: url(' + type + '); background-repeat: no-repeat; background-size: cover; transform: rotate(' + deg + 'deg); transition: transform 1s, background-color 1s, top 1s, left 1s, width 1s, height 1s, opacity 1s;;"></div>');
     } else if(special == "split"){
-        $('.box' + box).append('<div class="' + cash + '" style="position: absolute; width: 4vw; height: 4vw; top: ' + locationY + 'vw; left: ' + locationX + 'vw; transform: rotate(' + deg + 'deg); transition: transform 1s, background-color 1s, top 1s, left 1s, width 1s, height 1s; opacity 1s;"><div class="hl" style="background-image: url(' + fuseCubeL + '); background-repeat: no-repeat; background-size: cover; position: absolute; height: 4vw; width: 4vw;"></div><div class="hr" style="background-image: url(' + fuseCubeR + '); background-repeat: no-repeat; background-size: cover; position: absolute; height: 4vw; width: 4vw;"></div></div>')
+        $('.box' + box).append('<div class="' + cash + '" style="position: absolute; width: 4vw; height: 4vw; top: ' + locationY + 'vw; left: ' + locationX + 'vw; transform: rotate(' + deg + 'deg); transition: transform 1s, background-color 1s, top 1s, left 1s, width 1s, height 1s; opacity 1s;"><div class="hl" style="background-image: url(' + fuseCubeL + '); background-repeat: no-repeat; background-size: cover; position: absolute; height: 4vw; width: 4vw; transition: left 1s;"></div><div class="hr" style="background-image: url(' + fuseCubeR + '); background-repeat: no-repeat; background-size: cover; position: absolute; height: 4vw; width: 4vw; transition: left 1s;"></div></div>')
     };
 };
 
@@ -586,36 +586,53 @@ function animator(animkill){
 
 
 $(document).on('mouseenter', '.cash2', function(e) {
-    document.cookie = "gash=" + ((gash - 1) + 12);
+    document.cookie = "gash=" + ((gash - 1) + 16);
     gash = load("gash");
     animateRem = this;
-    animator(animateRem)
+    animatorSpl(animateRem)
     box2Cubes -= 1;
+    console.log(box2Cubes)
     updateCubeBuy();
 });
 
 function animatorSpl(animkill){
     $(animkill).attr("class", "ded")
     $(animkill).css({
-        transform: "rotate(0deg)",
+        transition: "opacity 0.25s, transform 1s, left 1s",
         opacity: "0"
     })
     
-    $(animkill + ".hfl").css({
-        left: "-=10"
-    })
+    window.setTimeout(function(){
+        $(animkill).find(".hl").css({
+            transition: "opacity 0.5s, transform 1s, left 1s",
+            left: "-4vw",
+        })
+
+        $(animkill).find(".hr").css({
+            transition: "opacity 0.5s, transform 1s, left 1s",
+            left: "4vw",
+        })
+        
+        $(animkill).css({
+            transition: "opacity 0.5s, transform 1s, left 1s",
+            transform: "rotate(0deg)",
+            opacity: "1"
+        })
+    }, 250);
     
-    $(animkill + ".hfr").css({
-        left: "+=10"
-    })
+    
+    window.setTimeout(function(){
+        $(animkill).css({
+            transition: "opacity 1s, transform 1s, left 1s",
+            opacity: "0"
+        })
+    }, 750);
+    
     
     window.setTimeout(function(){
         animkill.remove();
-    }, 1000);
+    }, 1750);
 }
-
-
-
 
 
 
