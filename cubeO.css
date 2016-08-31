@@ -559,7 +559,6 @@ body {
     border-style: solid;
     height: 19.5vw;    
     border-width: 0.5vw;
-    background-color: white;
     background-color: lightblue;
 }
 
@@ -615,21 +614,60 @@ body {
     top: 1vw;
     left: 34vw;
     background-color: blue;
+    transform: rotate(0deg);
+    transition: transform 1s;
 }
 
 .cash {
     position: absolute;
-    top: -1.6vw;
+    top: 1.8vw;
     color: white;
     font-family: "Arial Black";
-    left: 35.7vw;
+    left: 34.2vw;
+    font-size: 1.46vw;
 }
 
+.containerShopC {
+    background-color: lightblue;
+    position: absolute;
+    top: 8vw;
+    height: 8vw;
+    width: 42vw;
+}
 
+.cubeimgText {
+    position: absolute;
+    left: 8vw;
+    top: -1.1vw;
+    font-size: 3vw;
+    font-family: "Arial"
+}
 
+.cubeimg {
+    position: absolute;
+    height: 6vw;
+    width: 6vw;
+    background-color: blue;
+    background-image: url("CubeintO - Main Cube.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 1vw;
+    left: 1vw;
+    transition: background-color 1s;
+}
 
-
-
+.cubeimg:hover {
+    position: absolute;
+    height: 6vw;
+    width: 6vw;
+    background-color: darkcyan;
+    background-image: url("CubeintO - Main Cube.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    top: 1vw;
+    left: 1vw;
+    transition: background-color 1s;
+}
 
 
 
