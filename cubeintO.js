@@ -1,673 +1,511 @@
-@import url(https://fonts.googleapis.com/css?family=Syncopate);
-@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700);
+console.log("We are running on CUBEINT Official Ver.3");
+console.log("Hello there, I am the creator of CUBEINT. My name is Anthony M. DaLuz. If you are reading this feel free to poke around and have fun. Just do me a favor and dont steal anything yeh?");
+console.log(".....");
+console.log("OH RIGHT! Contact info! You can contact me on skype or hotmail. (Skype = anthony.daluz1) & (Email = anthonydaluz@hotmail.com)");
 
-body {
- overflow: hidden;
- background-color: black;
+var outdeg = 0;
+var indeg = 0;
+
+var neg = "yes";
+
+var curbox = 1; 
+
+// Variables
+var stage = load('stage');
+var name = load('name');
+
+var gash = load('gash');
+
+var storeOpen = false;
+var cubeColor = load('cubeColor');
+
+// Stage 0 Animators.
+
+var outspinner = setInterval(spinOuter, 1);
+clearInterval(outspinner);
+var inspinner = setInterval(spinIn, 1);
+clearInterval(inspinner);
+var cashspin = setInterval(spinCash, 1000);
+var cashupdate = setInterval(updateCash, 10);
+
+var MAINsystem = {}
+
+MAINsystem["Acheivements"] = {
+    scube: load('as'),
+    tcube: load('at'),
+    fcube: load('af'),
+    ffcube: load('aff'),
+    sscube: load('ass'),
+    ssscube: load('asss'),
+    hundo: load("ahundo"),
+    thundo: load("athundo"),
+    mundo: load("amundo"),
+    bundo: load("abundo")
 }
 
-.spawnFirstTime {
-    z-index: 9;
-    background-color: dimgrey;
-    position: absolute;
-    left: 0vw;
-    top: 0vw;
-    height: 1000vw;
-    width: 100vw;
+MAINsystem["cubes"] = {
+    scube: load('bs'),
+    tcube: load('bt'),
+    fcube: load('bf'),
+    ffcube: load('bff'),
+    sscube: load('bss'),
+    ssscube: load('bsss')
 }
 
-.outerWhiteSpin {
-    background-color: white;
-    position: absolute;
-    height: 42vw;
-    width: 42vw;
-    top: 4vw;
-    left: 29.5vw;
-}
-
-.innerBlackSpin {
-    background-color: black;
-    position: absolute;
-    height: 40vw;
-    width: 40vw;
-    top: 5vw;
-    left: 30.5vw;
-    opacity: 0.5;
-}
-
-.Enteryourname {
-    position: absolute;
-    height: 4vw;
-    width: 27.5vw;
-    font-family: "Roboto Condensed";
-    text-align: center;
-    font-size: 2.1vw;
-    border-radius: 10px;
-    border-style: solid;
-    border-color: gray;
-    top: 20vw;
-    left: 36.5vw;
-}
-
-.playGameText {
-    color: black;
-    font-family: Syncopate;
-    font-size: 3vw;
-    margin-left: 2.25vw;
-    margin-top: 0.75vw;
-}
-
-.playGameDiv {
-    position: absolute;
-    top: 30vw;
-    left: 43vw;
-    width: 15vw;
-    height: 5vw;
-    background-color: white;
-    border-style: solid;
-    border-radius: 25px;
-    border-color: gray;
-    transition: border-color 1s, background-color 1s;
-}
-
-.playGameDiv:hover {
-    position: absolute;
-    top: 30vw;
-    left: 43vw;
-    width: 15vw;
-    height: 5vw;
-    background-color: darkgray;
-    border-style: solid;
-    border-radius: 25px;
-    border-color: dimgray;
-    transition: border-color 1s, background-color 1s;
+MAINsystem["tech"] = {
+    autoColScube: load('autoColS'),
+    autoBuyScube: load('autoBuyS')
 }
 
 
 
-.resumeGameDiv {
-    position: absolute;
-    top: 30vw;
-    left: 38.5vw;
-    width: 24vw;
-    height: 5vw;
-    background-color: white;
-    border-style: solid;
-    border-radius: 25px;
-    border-color: gray;
-    transition: border-color 1s, background-color 1s;
+// images
+
+var mainCube = "CubeintO - Main Cube.png";
+
+// Initiantion Function
+
+function intin(){
+    document.cookie = "stage=1";
+    document.cookie = "name=" + $('.Enteryourname').val();
+    document.cookie = "cubeColor=blue";
+    document.cookie = "gash=1";
+    document.cookie = "as=no";
+    document.cookie = "at=no";
+    document.cookie = "af=no";
+    document.cookie = "aff=no";
+    document.cookie = "ass=no";
+    document.cookie = "asss=no";
+    document.cookie = "ahundo=no";
+    document.cookie = "athundo=no";
+    document.cookie = "amundo=no";
+    document.cookie = "abundo=no";
+    document.cookie = "bs=no";
+    document.cookie = "bt=no";
+    document.cookie = "bf=no";
+    document.cookie = "bff=no";
+    document.cookie = "bss=no";
+    document.cookie = "bsss=no";
+    
+    
+    document.cookie = "autoColS=no";
+    document.cookie = "autoBuyS=no";
 }
 
-.resumeGameDiv:hover {
-    position: absolute;
-    top: 30vw;
-    left: 38.5vw;
-    width: 24vw;
-    height: 5vw;
-    background-color: darkgray;
-    border-style: solid;
-    border-radius: 25px;
-    border-color: dimgray;
-    transition: border-color 1s, background-color 1s;
+// Code
+
+if(stage == null || stage == '0'){
+    outspinner = setInterval(spinOuter, 1);
+    inspinner = setInterval(spinIn, 1);
+    window.setTimeout(function(){
+        $('.playerStart').css({
+            opacity: "1",
+            zIndex: "1"
+        })
+    }, 1000)
 }
 
-
-
-.newGameDiv {
-    position: absolute;
-    top: 20vw;
-    left: 37vw;
-    width: 27vw;
-    height: 5vw;
-    background-color: white;
-    border-style: solid;
-    border-radius: 25px;
-    border-color: gray;
-    transition: border-color 1s, background-color 1s;
-}
-
-.newGameDiv:hover {
-    position: absolute;
-    top: 20vw;
-    left: 37vw;
-    width: 27vw;
-    height: 5vw;
-    background-color: darkgray;
-    border-style: solid;
-    border-radius: 25px;
-    border-color: dimgray;
-    transition: border-color 1s, background-color 1s;
+if(stage == '1'){
+    outspinner = setInterval(spinOuter, 1);
+    inspinner = setInterval(spinIn, 1);
+    window.setTimeout(function(){
+        $('.continue').css({
+            opacity: "1",
+            zIndex: "1"
+        })
+    }, 1000)
 }
 
 
 
 
+$('.rightArrow').click(function(){
+    if(curbox == 1){
+        $('.box' + curbox).css({
+            left: "-70vw"
+        })
+        curbox = 2;
+        $('.box' + curbox).css({
+            left: "10vw"
+        })
+        return false;
+    }
+    
+    if(curbox == 2){
+        $('.box' + curbox).css({
+            left: "-70vw"
+        })
+        curbox = 3;
+        $('.box' + curbox).css({
+            left: "10vw"
+        })
+        return false;
+    }
+})
+
+$('.leftArrow').click(function(){
+    if(curbox == 2){
+        $('.box' + curbox).css({
+            left: "70vw"
+        })
+        curbox = 1;
+        $('.box' + curbox).css({
+            left: "10vw"
+        })
+        return false;
+    }
+    
+    if(curbox == 3){
+        $('.box' + curbox).css({
+            left: "70vw"
+        })
+        curbox = 2;
+        $('.box' + curbox).css({
+            left: "10vw"
+        })
+        return false;
+    }
+})
+
+$('.resumeGameDiv').click(function(){
+    cubeColor = "blue";
+    fadeIt();
+    window.setTimeout(function(){
+        $('.spawnFirstTime').css({
+            zIndex: "-1",
+        });
+        
+        $('.gamefarm').css({
+            zIndex: "9",
+        });
+        clearInterval(inspinner);
+        clearInterval(outspinner);
+    }, 1000)
+});
+
+$('.newGameDiv').click(function(){
+    document.cookie = "stage=0";
+    fadeIt();
+    window.setTimeout(function(){
+        $('.playerStart').css({
+            opacity: "1",
+            zIndex: "1"
+        })
+        $('.continue').css({
+            opacity: "0",
+            zIndex: "-9"
+        })
+    }, 1000)
+});
 
 
-.Gametitle {
-    text-align: center;
-    color: white;
-}
 
-.Titlediv {
-    position: absolute;
-    top: 4vw;
-    left: 34vw;
-    width: 33vw;
-    height: 7vw;
-    background-color: white;
-    border-style: solid;
-    border-radius: 25px;
-    border-color: gray;
-}
+$('.playGameDiv').click(function(){
+    if($('.Enteryourname').val().length > 0){
+        if($('.Enteryourname').val().toLowerCase() == "mario"){
+            alertIt("Sorry Mario, your princess is in <br> another castle.")
+        }else if($('.Enteryourname').val().toLowerCase() == "link"){
+            alertIt("I think you mean Zelda.")
+        }else if($('.Enteryourname').val().toLowerCase() == "sonic"){
+            alertIt("Gotta go fest!!!!11one!!1")
+        }else if($('.Enteryourname').val().toLowerCase() == "cubeint"){
+            alertIt("*cough*")
+        }else if($('.Enteryourname').val().toLowerCase() == "aaaaaaaaaaaaaaaaa"){
+            alertIt("You better change that.")
+        }else if($('.Enteryourname').val().toLowerCase() == "bbbbbbbbbbbbbbbbb"){
+            alertIt("Stop it.")
+        }else if($('.Enteryourname').val().toLowerCase() == "ccccccccccccccccc"){
+            alertIt("Fine god damnit. Just wait 70 years <br> and ill let you use that name.")
+        }else if($('.Enteryourname').val().toLowerCase() == "ddddddddddddddddd"){
+            alertIt("Jesus christ man just choose a <br> unqiue name!")
+        }else if($('.Enteryourname').val().toLowerCase() == "eeeeeeeeeeeeeeeee"){
+            alertIt("...")
+        }else if($('.Enteryourname').val().toLowerCase() == "fffffffffffffffff"){
+            alertIt("I wont give up you know?")
+        }else if($('.Enteryourname').val().toLowerCase() == "ggggggggggggggggg"){
+            alertIt("Well looks like we will be here <br> for a while...")
+        }else if($('.Enteryourname').val().toLowerCase() == "hhhhhhhhhhhhhhhhh"){
+            alertIt("Your determination is disturbing.")
+        }else if($('.Enteryourname').val().toLowerCase() == "iiiiiiiiiiiiiiiii"){
+            alertIt("If you dont stop im going to say <br> some really <b>BAD</b> words.")
+        }else if($('.Enteryourname').val().toLowerCase() == "jjjjjjjjjjjjjjjjj"){
+            alertIt("Some really bad words.")
+        }else if($('.Enteryourname').val().toLowerCase() == "kkkkkkkkkkkkkkkkk"){
+            alertIt("Fine I give up go ahead.")
+        }else if($('.Enteryourname').val().toLowerCase() == "lllllllllllllllll"){
+            alertIt("Im sorry, its the next one. <br> Do the next one.")
+        }else if($('.Enteryourname').val().toLowerCase() == "mmmmmmmmmmmmmmmmm"){
+            alertIt("I love how there was a 50% <br> chance in which you <br> believed me.")
+        }else if($('.Enteryourname').val().toLowerCase() == "nnnnnnnnnnnnnnnnn"){
+            alertIt("Want to know my dream? <br> For a youtuber to <br> play this.")
+        }else if($('.Enteryourname').val().toLowerCase() == "ooooooooooooooooo"){
+            alertIt("My other dream is to have <br> A cube shaped pie.")
+        }else if($('.Enteryourname').val().toLowerCase() == "ppppppppppppppppp"){
+            alertIt("My final dream is for you to <br> stop trying.")
+        }else if($('.Enteryourname').val().toLowerCase() == "qqqqqqqqqqqqqqqqq"){
+            alertIt("My final dream is for you to <br> stop trying.")
+        }else if($('.Enteryourname').val().toLowerCase() == "rrrrrrrrrrrrrrrrr"){
+            alertIt("You are running out letters... <br> s,t,u,v,w,x,y,z are left.")
+        }else if($('.Enteryourname').val().toLowerCase() == "sssssssssssssssss"){
+            alertIt("Im also running out of patience.")
+        }else if($('.Enteryourname').val().toLowerCase() == "ttttttttttttttttt"){
+            alertIt("Im dead inside...")
+        }else if($('.Enteryourname').val().toLowerCase() == "uuuuuuuuuuuuuuuuu"){
+            alertIt("U better stop.")
+        }else if($('.Enteryourname').val().toLowerCase() == "vvvvvvvvvvvvvvvvv"){
+            alertIt("I have no words. You spent around... <br> 2 minutes doing this.")
+        }else if($('.Enteryourname').val().toLowerCase() == "wwwwwwwwwwwwwwwww"){
+            alertIt("I guess our little journey is coming <br> to an end.")
+        }else if($('.Enteryourname').val().toLowerCase() == "xxxxxxxxxxxxxxxxx"){
+            alertIt("Just 2 more letters.....")
+        }else if($('.Enteryourname').val().toLowerCase() == "yyyyyyyyyyyyyyyyy"){
+            alertIt("You know... I love you.")
+        }else if($('.Enteryourname').val().toLowerCase() == "zzzzzzzzzzzzzzzzz"){
+            alertIt("Never let anyone stop you from what <br> you do. Stay strong and power <br> through.")
+        }else {
+            cubeColor = "blue";
+            fadeIt();
+            intin();
+            window.setTimeout(function(){
+                $('.spawnFirstTime').css({
+                    zIndex: "-1",
+                });
 
-.titleh1 {
-    color: black;
-    font-family: Syncopate;
-    font-size: 3.6vw;
-    margin-left: 2.25vw;
-    margin-top: 1.4vw;
-}
+                $('.gamefarm').css({
+                    zIndex: "9",
+                });
+                clearInterval(inspinner);
+                clearInterval(outspinner);
+            }, 1000)
+        };
+    } else {
+        alertIt("Please put in atleast 1 Character")
+    };
+});
 
-.playerStart {
-    position: absolute;
-    opacity: 0;
-    transition: opacity 2s;
-    z-index: -9;
-}
 
-.continue{
-    position: absolute;
-    opacity: 0;
-    transition: opacity 2s;
-    z-index: -9;
-}
 
-.Alerter {
-    position: absolute;
-    top: -1vw;
-    left: -1vw;
-    z-index: 0;
-    background-color: white;
-    width: 1000vw;
-    height: 1000vw;
-    opacity: 0;
-    transition: opacity 1s;
-}
-
-.alertinfo {
-    position: absolute;
-    top: 5vw;
-    left: 5vw;
-    font-size: 5vw;
-    font-family: Arial;
-}
-
-.fader {
-    position: absolute;
-    top: -1vw;
-    left: -1vw;
-    z-index: 0;
-    background-color: black;
-    width: 1000vw;
-    height: 1000vw;
-    opacity: 0;
-    transition: opacity 1s;
-}
-
-.gamefarm {
-    z-index: -1;
-    background-color: aliceblue;
-    position: absolute;
-    left: 0vw;
-    top: 0vw;
-    height: 1000vw;
-    width: 100vw;
-}
-
-.title {
-    color: black;
-    font-family: Syncopate;
-    font-size: 3.6vw;
-    margin-left: 33vw;
-    margin-top: 1.4vw;
-}
-
-.titleHolder {
-    position: absolute;
-    background-color: white;
-    width: 100vw;
-    height: 6vw;
-}
-
-.farmHolder {
-    position: absolute;
-    width: 55vw;
-    height: 39.5vw;
-    top: 7vw;
-    left: 1vw;
-    background-color: #EFEFFF;
-    border-color: #CCCCFF;
-    border-style: solid;
-    border-width: 0.5vw;
-    border-radius: 6px;
-    overflow-x: hidden;
-}
-
-.d1 {
-    position: absolute;
-    top: 7vw;
-    height: 6.5vw;
-    width: 40.5vw;
-    left: 58vw;
-    border-style: solid;
-    border-width: 0.5vw;
-    border-radius: 5px;
-    background-color: #EFEFFF;
-    border-color: #CCCCFF;
-    transition: border-color 0.5s, background-color 0.5s;
-}
-
-.d1:hover {
-    position: absolute;
-    top: 7vw;
-    height: 6.5vw;
-    width: 40.5vw;
-    left: 58vw;
-    border-style: solid;
-    border-width: 0.5vw;
-    border-radius: 5px;
-    background-color: #ECDFFF;
-    border-color: #EECCFF;
-    transition: border-color 0.5s, background-color 0.5s;
-}
-
-.d1t {
-    margin: 0.5vw;
-    font-size: 5vw;
-    font-family: "Roboto Condensed";
-    text-align: center;
-}
-
-.d2 {
-    position: absolute;
-    top: 15.25vw;
-    height: 6.5vw;
-    width: 40.5vw;
-    left: 58vw;
-    border-style: solid;
-    border-width: 0.5vw;
-    border-radius: 5px;
-    background-color: #EFEFFF;
-    border-color: #CCCCFF;
-    transition: border-color 0.5s, background-color 0.5s;
-}
-
-.d2:hover {
-    position: absolute;
-    top: 15.25vw;
-    height: 6.5vw;
-    width: 40.5vw;
-    left: 58vw;
-    border-style: solid;
-    border-width: 0.5vw;
-    border-radius: 5px;
-    background-color: #ECDFFF;
-    border-color: #EECCFF;
-    transition: border-color 0.5s, background-color 0.5s;
-}
-
-.d2t {
-    margin: 0.5vw;
-    font-size: 5vw;
-    font-family: "Roboto Condensed";
-    text-align: center;
-}
-
-.d3 {
-    position: absolute;
-    top: 23.5vw;
-    height: 6.5vw;
-    width: 40.5vw;
-    left: 58vw;
-    border-style: solid;
-    border-width: 0.5vw;
-    border-radius: 5px;
-    background-color: #EFEFFF;
-    border-color: #CCCCFF;
-    transition: border-color 0.5s, background-color 0.5s;
-}
-
-.d3:hover {
-    position: absolute;
-    top: 23.5vw;
-    height: 6.5vw;
-    width: 40.5vw;
-    left: 58vw;
-    border-style: solid;
-    border-width: 0.5vw;
-    border-radius: 5px;
-    background-color: #ECDFFF;
-    border-color: #EECCFF;
-    transition: border-color 0.5s, background-color 0.5s;
-}
-
-.d3t {
-    margin: 0.5vw;
-    font-size: 5vw;
-    font-family: "Roboto Condensed";
-    text-align: center;
-}
-
-.d4 {
-    position: absolute;
-    top: 31.75vw;
-    height: 6.5vw;
-    width: 40.5vw;
-    left: 58vw;
-    border-style: solid;
-    border-width: 0.5vw;
-    border-radius: 5px;
-    background-color: #EFEFFF;
-    border-color: #CCCCFF;
-    transition: border-color 0.5s, background-color 0.5s;
-}
-
-.d4:hover {
-    position: absolute;
-    top: 31.75vw;
-    height: 6.5vw;
-    width: 40.5vw;
-    left: 58vw;
-    border-style: solid;
-    border-width: 0.5vw;
-    border-radius: 5px;
-    background-color: #ECDFFF;
-    border-color: #EECCFF;
-    transition: border-color 0.5s, background-color 0.5s;
-}
-
-.d4t {
-    margin: 0.5vw;
-    font-size: 5vw;
-    font-family: "Roboto Condensed";
-    text-align: center;
-}
-
-.d5 {
-    position: absolute;
-    top: 40vw;
-    height: 6.5vw;
-    width: 40.5vw;
-    left: 58vw;
-    border-style: solid;
-    border-width: 0.5vw;
-    border-radius: 5px;
-    background-color: #EFEFFF;
-    border-color: #CCCCFF;
-    transition: border-color 0.5s, background-color 0.5s;
-}
-
-.d5:hover {
-    position: absolute;
-    top: 40vw;
-    height: 6.5vw;
-    width: 40.5vw;
-    left: 58vw;
-    border-style: solid;
-    border-width: 0.5vw;
-    border-radius: 5px;
-    background-color: #ECDFFF;
-    border-color: #EECCFF;
-    transition: border-color 0.5s, background-color 0.5s;
-}
-
-.d5t {
-    margin: 0.5vw;
-    font-size: 5vw;
-    font-family: "Roboto Condensed";
-    text-align: center;
-}
-
-.gameStore {
-    position: absolute;
-    height: 39.5vw;
-    width: 42vw;
-    background-color: aliceblue;
-    top: 7vw;
-    left: 120vw;
-    border-style: solid;
-    border-width: 0.5vw;
-    border-radius: 5px;
-    border-color: #CCCCFF;
-    transition: left 1s;
-}
-
-.speedStore {
-    position: absolute;
-    height: 39.5vw;
-    width: 42vw;
-    background-color: aliceblue;
-    top: 7vw;
-    left: 120vw;
-    border-style: solid;
-    border-width: 0.5vw;
-    border-radius: 5px;
-    border-color: #CCCCFF;
-    transition: left 1s;
-}
-
-.techStore {
-    position: absolute;
-    height: 39.5vw;
-    width: 42vw;
-    background-color: aliceblue;
-    top: 7vw;
-    left: 120vw;
-    border-style: solid;
-    border-width: 0.5vw;
-    border-radius: 5px;
-    border-color: #CCCCFF;
-    transition: left 1s;
-}
-
-.gameInfo {
-    position: absolute;
-    height: 39.5vw;
-    width: 42vw;
-    background-color: aliceblue;
-    top: 7vw;
-    left: 120vw;
-    border-style: solid;
-    border-width: 0.5vw;
-    border-radius: 5px;
-    border-color: #CCCCFF;
-    transition: left 1s;
-}
-
-.cad {
-    position: absolute;
-    height: 39.5vw;
-    width: 42vw;
-    background-color: aliceblue;
-    top: 7vw;
-    left: 120vw;
-    border-style: solid;
-    border-width: 0.5vw;
-    border-radius: 5px;
-    border-color: #CCCCFF;
-    transition: left 1s;
-}
-
-.Xbutton {
-    width: 2.5vw;
-    height: 2.5vw;
-    background-color: red;
-    font-size: 1.1vw;
-    text-align: center;
-    margin-top: -1.5vw;
+function alertIt(textToAlert){
+    $('.Alerter').css({
+        position: "absolute",
+        opacity: "0.75",
+        zIndex: "10",
+    });
+    $('.alertinfo').html(textToAlert);
+    window.setTimeout(function(){
+        $('.Alerter').css({
+            position: "absolute",
+            opacity: "0",
+        });
+    }, 2000);
+    window.setTimeout(function(){
+        $('.Alerter').css({
+            zIndex: "-9"
+        });
+        
+        $('.alertinfo').html(" ");
+    }, 3000);
 }
 
 
-.d1tt {
-    margin: -2.4vw;
-    font-size: 3vw;
-    font-family: "Arial Black";
-    text-align: center;
+
+function fadeIt(){
+    $('.fader').css({
+        position: "absolute",
+        opacity: "1",
+        zIndex: "10",
+    });
+    window.setTimeout(function(){
+        $('.fader').css({
+            position: "absolute",
+            opacity: "0",
+        });
+    }, 1000);
+    window.setTimeout(function(){
+        $('.fader').css({
+            zIndex: "-9"
+        });
+    }, 2000);
 }
 
 
-.d2tt {
-    margin: -2.4vw;
-    font-size: 3vw;
-    font-family: "Arial Black";
-    text-align: center;
+
+function load(key){
+    var result;
+    return (result = new RegExp('(?:^|; )' + encodeURIComponent(key) + '=([^;]*)').exec(document.cookie)) ? (result[1]) : null;
 }
 
 
-.d3tt {
-    margin: -2.4vw;
-    font-size: 3vw;
-    font-family: "Arial Black";
-    text-align: center;
+
+function spinOuter(){
+    $('.outerWhiteSpin').css({
+        transform: "rotate(" + outdeg + "deg)"
+    })
+    outdeg += 0.1;
 }
 
 
-.d4tt {
-    margin: -2.4vw;
-    font-size: 3vw;
-    font-family: "Arial Black";
-    text-align: center;
+
+function spinIn(){
+    $('.innerBlackSpin').css({
+        transform: "rotate(" + indeg + "deg)"
+    })
+    indeg -= 0.1;
 }
 
-.leftArrow {
-    position: absolute;
-    width: 3vw;
-    top: 7.4vw;
-    left: 1.4vw;
-    border-style: solid;
-    height: 19vw;
-    border-width: 0.5vw;
-    background-color: lightblue;
+function updateCash(){
+    gash = load('gash')
+    
+    if(parseInt(gash) >= 0 && parseInt(gash) < 1000){
+        $('.cash').text(gash);
+    } else if(parseInt(gash) > 999 && parseInt(gash) < 1000000){
+        
+        $('.cash').text((Number((gash / 1000).toString().match(/^\d+(?:\.\d{0,1})?/))) + "K")
+        
+    } else if(parseInt(gash) > 999999 && parseInt(gash) < 1000000000){
+        
+        $('.cash').text((Number((gash / 100000).toString().match(/^\d+(?:\.\d{0,1})?/))) + "M")
+        
+    } else if(parseInt(gash) > 999999999 && parseInt(gash) < 1000000000000){
+        
+        $('.cash').text((Number((gash / 100000).toString().match(/^\d+(?:\.\d{0,1})?/))) + "B")
+        
+    } else {
+        $('.cash').text("ERROR");
+    }
 }
 
-.rightArrow {
-    position: absolute;
-    width: 3vw;
-    top: 26.8vw;
-    left: 1.4vw;
-    border-style: solid;
-    height: 19.5vw;    
-    border-width: 0.5vw;
-    background-color: lightblue;
+function spinCash(){
+    
+    if(neg == "yes"){
+        $('.cubeCash').css({
+            transform: "rotate(" + "10" + "deg)"
+        });
+        
+        neg = "no";
+        
+        return false;
+    }
+    if(neg == "no"){
+        $('.cubeCash').css({
+            transform: "rotate(" + "-10" + "deg)"
+        });
+        
+        neg = "yes";
+        
+        return false;
+    }
 }
 
-.btext1 {
-    font-size: 4.2vw;
-    margin-top: 7vw;
-    text-align: center;
+$('.d1').click(function(){
+    if(storeOpen == false){
+        storeOpen = true;
+        $(".gameStore").css({
+            left: "57vw",
+            zIndex: "10"
+        });
+    };
+});
+
+
+$('.d2').click(function(){
+    if(storeOpen == false){
+        storeOpen = true;
+        $(".speedStore").css({
+            left: "57vw",
+            zIndex: "10"
+        });
+    };
+});
+
+
+$('.d3').click(function(){
+    if(storeOpen == false){
+        storeOpen = true;
+        $(".techStore").css({
+            left: "57vw",
+            zIndex: "10"
+        });
+    };
+});
+
+
+$('.d4').click(function(){
+    if(storeOpen == false){
+        storeOpen = true;
+        $(".gameInfo").css({
+            left: "57vw",
+            zIndex: "10"
+        });
+    };
+});
+
+
+$('.d5').click(function(){
+    if(storeOpen == false){
+        storeOpen = true;
+        $(".cad").css({
+            left: "57vw",
+            zIndex: "10"
+        });
+    };
+});
+
+$('.Xbutton').click(function(){
+    if(storeOpen == true){
+        storeOpen = false;
+        $(".gameInfo").css({
+            left: "120vw",
+            zIndex: "10"
+        });
+        $(".gameStore").css({
+            left: "120vw",
+            zIndex: "10"
+        });
+        $(".speedStore").css({
+            left: "120vw",
+            zIndex: "10"
+        });
+        $(".techStore").css({
+            left: "120vw",
+            zIndex: "10"
+        });
+        $(".cad").css({
+            left: "120vw",
+            zIndex: "10"
+        });
+    };
+});
+
+function spawnCube(type, box, locationX, locationY, color, cash){
+    
 }
 
-.btext2 {
-    font-size: 4.2vw;
-    margin-top: 7vw;
-    text-align: center;
-}
 
-.box1 {
-    height: 38vw;
-    width: 38vw;
-    position: absolute;
-    background-color: lightgray;
-    top: 0.9vw;
-    left: 10vw;
-    transition: left 1s;
-}
 
-.box2 {
-    height: 38vw;
-    width: 38vw;
-    position: absolute;
-    background-color: lightgray;
-    top: 0.9vw;
-    left: 70vw;
-    transition: left 1s;
-}
 
-.box3 {
-    height: 38vw;
-    width: 38vw;
-    position: absolute;
-    background-color: lightgray;
-    top: 0.9vw;
-    left: 70vw;
-    transition: left 1s;
-}
 
-.cubeCash {
-    position: absolute;
-    width: 6vw;
-    height: 6vw;
-    background-image: url("CubeintO - Main Cube.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    top: 1vw;
-    left: 34vw;
-    background-color: blue;
-    transform: rotate(0deg);
-    transition: transform 1s;
-}
 
-.cash {
-    position: absolute;
-    top: 1.8vw;
-    color: white;
-    font-family: "Arial Black";
-    left: 34.2vw;
-    font-size: 1.46vw;
-}
 
-.containerShopC {
-    background-color: lightblue;
-    position: absolute;
-    top: 8vw;
-    height: 8vw;
-    width: 42vw;
-}
 
-.cubeimgText {
-    position: absolute;
-    left: 8vw;
-    top: -1.1vw;
-    font-size: 3vw;
-    font-family: "Arial"
-}
 
-.cubeimg {
-    position: absolute;
-    height: 6vw;
-    width: 6vw;
-    background-color: blue;
-    background-image: url("CubeintO - Main Cube.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    top: 1vw;
-    left: 1vw;
-    transition: background-color 1s;
-}
 
-.cubeimg:hover {
-    position: absolute;
-    height: 6vw;
-    width: 6vw;
-    background-color: darkcyan;
-    background-image: url("CubeintO - Main Cube.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    top: 1vw;
-    left: 1vw;
-    transition: background-color 1s;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
